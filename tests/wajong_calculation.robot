@@ -6,7 +6,6 @@ Metadata        Wajong 2025
 Library        SeleniumLibrary
 Library        String
 Library        ../lib/Format.py
-Library    Dialogs
 
 Resource        ../util/common_keywords.resource
 Resource        ../page_objects/home_page.resource

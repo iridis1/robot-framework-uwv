@@ -5,8 +5,10 @@ Metadata        Wajong 2025
 
 Library        SeleniumLibrary
 Library        String
+Library        ../lib/Format.py
 Library    Dialogs
-Resource        ../lib/common_keywords.resource
+
+Resource        ../util/common_keywords.resource
 Resource        ../page_objects/home_page.resource
 Resource        ../page_objects/wajong_calculation.resource
 Resource        ../data/wajong.resource
@@ -42,7 +44,7 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
 # When
 
 Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1"]/div/div/label
+    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_18"]/div/div/label
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
     Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
@@ -52,8 +54,8 @@ Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
 Bedragen zijn correct
     Title Should Be   ${page_title} ${page_title_postfix}
     Page Should Contain    De uitkomst
-    ${uitkering}    EVALUATE    f"{${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}:_.2f}".replace(".", ",").replace("_", ".")
-    Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd    € ${uitkering} per maand
+    ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
+    Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd    ${uitkering} per maand
     Element Should Contain    xpath://dt[text()="Uw bruto-inkomsten"]/following-sibling::dd    € 0,00 per maand
-    Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    ${uitkering}
+    Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    ${uitkering} per maand
 

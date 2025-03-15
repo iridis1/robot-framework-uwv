@@ -1,4 +1,4 @@
 # robot-framework-uwv
 
-Testing Wajong benefit using Robot Framework.
+Testing Wajong benefit calculation using Robot Framework.
 

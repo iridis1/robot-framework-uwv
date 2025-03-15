@@ -24,6 +24,11 @@ Bereken hoogte uitkering voor 18 jaar zonder andere inkomsten maar wel arbeidsve
     When Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
     Then Bedragen zijn correct
 
+Bereken hoogte uitkering voor 20 jaar zonder andere inkomsten maar wel arbeidsvermogen
+    Given Gebruiker start rekenhulp voor hoogte Wajong-uitkering
+    When Leeftijd 20, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
+    Then Bedragen zijn correct
+
 
 *** Keywords ***
 
@@ -42,8 +47,9 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
 
 # When
 
-Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_18"]/div/div/label
+Leeftijd ${leeftijd}, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
+    Set Test Variable    ${age}    ${leeftijd}        
+    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_${leeftijd}"]/div/div/label
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
     Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
@@ -53,8 +59,14 @@ Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
 Bedragen zijn correct
     Title Should Be   ${page_title} ${page_title_postfix}
     Page Should Contain    De uitkomst
-    ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
+    IF    ${age} == 18
+        ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
+    ELSE IF    ${age} == 20
+        ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_20_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
+    END
+
     Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd    ${uitkering} per maand
     Element Should Contain    xpath://dt[text()="Uw bruto-inkomsten"]/following-sibling::dd    € 0,00 per maand
     Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    ${uitkering} per maand
+
 

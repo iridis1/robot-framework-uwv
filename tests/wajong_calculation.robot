@@ -4,10 +4,12 @@ Documentation   Wajong uitkering berekening
 Metadata        Wajong 2025 
 
 Library        SeleniumLibrary
+Library        String
 Library    Dialogs
 Resource        ../lib/common_keywords.resource
 Resource        ../page_objects/home_page.resource
 Resource        ../page_objects/wajong_calculation.resource
+Resource        ../data/wajong.resource
 
 *** Variables ***
 ${page_title}      Hoogte Wajong-uitkering in 2025
@@ -16,9 +18,10 @@ ${page_title_postfix}   | UWV
 
 *** Test Cases ***
 
-Bereken hoogte uitkering voor 18 jaar
+Bereken hoogte uitkering voor 18 jaar zonder andere inkomsten maar wel arbeidsvermogen
     Given Gebruiker start rekenhulp voor hoogte Wajong-uitkering
-    When Leeftijd 18 wordt geselecteerd
+    When Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
+    Then Bedragen zijn correct
 
 
 *** Keywords ***
@@ -38,11 +41,19 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
 
 # When
 
-Leeftijd ${leeftijd} wordt geselecteerd
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_19"]
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]
-    Press Keys    None    PAGE_DOWN    
-    Click Element    xpath://bgl-button[@button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
+Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
+    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1"]/div/div/label
+    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
+    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
+    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
 
 # Then
+
+Bedragen zijn correct
+    Title Should Be   ${page_title} ${page_title_postfix}
+    Page Should Contain    De uitkomst
+    ${uitkering}    EVALUATE    f"{${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}:_.2f}".replace(".", ",").replace("_", ".")
+    Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd    € ${uitkering} per maand
+    Element Should Contain    xpath://dt[text()="Uw bruto-inkomsten"]/following-sibling::dd    € 0,00 per maand
+    Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    ${uitkering}
+

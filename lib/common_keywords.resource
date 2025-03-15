@@ -9,9 +9,11 @@ Resource    ../config.resource
 
 Open Site
     Log    ${BASE_URL}
+    Set Screenshot Directory    screenshots
     Open Browser    ${BASE_URL}    ${BROWSER}
 
 
 Accept Cookies
     Wait Until Element Is Visible    xpath://h2[contains(text(), "UWV gebruikt cookies")]
     Click Element    xpath://span[contains(text(), "Alles accepteren")]    
+

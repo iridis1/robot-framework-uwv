@@ -10,6 +10,8 @@ wheels/
 share/python-wheels/
 pip-log.txt
 geckodriver*.log
+interactive_console_output.xml
+selenium-screenshot*.png
 
 # Environments
 .env

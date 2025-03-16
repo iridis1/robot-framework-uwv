@@ -24,9 +24,9 @@ Bereken hoogte uitkering voor 18 jaar zonder andere inkomsten maar wel arbeidsve
     When Leeftijd 18, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
     Then Bedragen zijn correct
 
-Bereken hoogte uitkering voor 20 jaar zonder andere inkomsten maar wel arbeidsvermogen
+Bereken hoogte uitkering voor 20 jaar zonder andere inkomsten maar geen arbeidsvermogen
     Given Gebruiker start rekenhulp voor hoogte Wajong-uitkering
-    When Leeftijd 20, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
+    When Leeftijd 20, geen andere inkomsten maar geen arbeidsvermogen wordt geselecteerd
     Then Bedragen zijn correct
 
 
@@ -47,12 +47,17 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
 
 # When
 
-Leeftijd ${leeftijd}, geen andere inkomsten maar wel arbeidsvermogen wordt geselecteerd
-    Set Test Variable    ${age}    ${leeftijd}        
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_${leeftijd}"]/div/div/label
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
-    Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
-    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
+Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermogen wordt geselecteerd
+    Set Test Variable    ${age}    ${leeftijd}      
+    Set Test Variable    ${can_work}    ${arbeidsvermogen}           
+    Click Element     xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_${leeftijd}"]/div/div/label
+    Click Element     xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
+    IF    "${arbeidsvermogen}" == "wel"
+        Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
+    ELSE IF    "${arbeidsvermogen}" == "geen"
+        Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_no"]/div/div/label
+    END
+    Click Element     css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
 
 # Then
 
@@ -60,9 +65,10 @@ Bedragen zijn correct
     Title Should Be   ${page_title} ${page_title_postfix}
     Page Should Contain    De uitkomst
     IF    ${age} == 18
+        Page Should Contain    De uitkomst
         ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_18_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
     ELSE IF    ${age} == 20
-        ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_20_JAAR_GEEN_INKOMSTEN_WEL_ARBEIDSVERMOGEN}
+        ${uitkering}    Format Currency    ${UITKERING_LEEFTIJD_20_JAAR_GEEN_INKOMSTEN_GEEN_ARBEIDSVERMOGEN}
     END
 
     Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd    ${uitkering} per maand

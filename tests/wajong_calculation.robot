@@ -14,11 +14,10 @@ Resource        ../util/common_keywords.resource
 Resource        ../page_objects/home_page.resource
 Resource        ../page_objects/wajong_calculation.resource
 
-
 *** Variables ***
+
 ${page_title}      Hoogte Wajong-uitkering in 2025
 ${page_title_postfix}   | UWV
-
 
 *** Test Cases ***
 
@@ -82,5 +81,3 @@ Bedragen zijn correct
     Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd            € ${benefit_formatted} per maand
     Element Should Contain    xpath://dt[text()="Uw bruto-inkomsten"]/following-sibling::dd      € 0,00 per maand
     Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    € ${benefit_formatted} per maand
-
-

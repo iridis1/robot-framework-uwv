@@ -13,7 +13,6 @@ Search
     [Arguments]    ${search_text}
     Input Text     ${search_input}    ${search_text}
     Press Keys     None    ENTER
-
     
  Login    
     [Arguments]    ${user}    ${password}

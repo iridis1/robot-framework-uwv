@@ -9,7 +9,7 @@ Resource    ../config.resource
 
 Open Site
     Log    Opening ${BASE_URL}...
-    Set Screenshot Directory    screenshots
+    Set Screenshot Directory    results/screenshots
     Open Browser    ${BASE_URL}    ${BROWSER}
 
 Accept Cookies

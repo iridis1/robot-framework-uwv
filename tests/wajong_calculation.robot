@@ -50,6 +50,7 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Wait Until Page Contains    Toont 1-10
     Page Should Contain Link    ${page_title} ${page_title_postfix}
     Click Link                  ${page_title} ${page_title_postfix}
+    Wait Until Page Contains    Hoogte Wajong
     Title Should Be             ${page_title} ${page_title_postfix}
     Click Start Button
     Page Should Contain         Uw gegevens

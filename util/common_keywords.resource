@@ -17,4 +17,4 @@ Accept Cookies
 
 Set Configuration
     Set Screenshot Directory    results/screenshots
-    Set Selenium Implicit Wait    14
+    Set Selenium Implicit Wait    16

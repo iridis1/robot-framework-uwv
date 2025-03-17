@@ -3,6 +3,7 @@
 Documentation   Wajong uitkering berekening
 Metadata        Wajong 2025 
 
+Test Setup      Set Configuration
 Test Teardown   Close Browser
 
 Library         SeleniumLibrary

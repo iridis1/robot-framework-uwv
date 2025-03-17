@@ -16,8 +16,9 @@ Resource        ../page_objects/wajong_calculation.resource
 
 *** Variables ***
 
-${page_title}      Hoogte Wajong-uitkering in 2025
+${page_title}           Hoogte Wajong-uitkering in 2025
 ${page_title_postfix}   | UWV
+
 
 *** Test Cases ***
 
@@ -44,40 +45,34 @@ Bereken hoogte uitkering voor leeftijd 22 jaar zonder andere inkomsten maar wel 
 Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Open Site
     Accept Cookies       
-    Search    ${page_title}
+    Search                      ${page_title}
     Wait Until Page Contains    Toont 1-10
     Page Should Contain Link    ${page_title} ${page_title_postfix}
-    Click Link    ${page_title} ${page_title_postfix}
-    Title Should Be   ${page_title} ${page_title_postfix}
+    Click Link                  ${page_title} ${page_title_postfix}
+    Title Should Be             ${page_title} ${page_title_postfix}
     Click Start Button
-    Page Should Contain    Uw gegevens
+    Page Should Contain         Uw gegevens
 
 # When
 
 Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermogen wordt geselecteerd
-    Set Test Variable    ${age}    ${leeftijd}      
-    Set Test Variable    ${arbeidsvermogen}    ${arbeidsvermogen}   
-    IF    ${leeftijd} < 21
-        Click Element     xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_${leeftijd}"]/div/div/label
-    ELSE
-        Click Element     xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question1_21"]/div/div/label
-    END
-    Click Element     xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question2_no"]/div/div/label
-    IF    "${arbeidsvermogen}" == "wel"
-        Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_yes"]/div/div/label
-    ELSE IF    "${arbeidsvermogen}" == "geen"
-        Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_question3_no"]/div/div/label
-    END
-    Click Element     css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
+    Set Test Variable           ${leeftijd}           ${leeftijd}      
+    Set Test Variable           ${arbeidsvermogen}    ${arbeidsvermogen}   
+    Select Leeftijd             ${leeftijd}
+    Select Inkomen              geen
+    Select Arbeidsvermogen      ${arbeidsvermogen}
+    Click Next Step Button
 
 # Then
 
 Bedragen zijn correct
     Title Should Be   ${page_title} ${page_title_postfix}
-    Page Should Contain    De uitkomst
-    ${can_work} =    Evaluate    "${arbeidsvermogen}" == "wel"             
-    ${benefit} =     Calculate Benefit    ${age}    ${can_work}
-    ${benefit_formatted} =    Format Currency    ${benefit}
-    Element Should Contain    xpath://dt[text()="Uw uitkering"]/following-sibling::dd            € ${benefit_formatted} per maand
-    Element Should Contain    xpath://dt[text()="Uw bruto-inkomsten"]/following-sibling::dd      € 0,00 per maand
-    Element Should Contain    xpath://dt[text()="Totale bruto-inkomen"]/following-sibling::dd    € ${benefit_formatted} per maand
+    Page Should Contain            De uitkomst
+    ${uitkering} =                 Calculate Benefit    ${leeftijd}    ${arbeidsvermogen == "wel"}
+    ${uitkering_geformateerd} =    Format Currency      ${uitkering}
+    Element Should Contain         ${selector_uw_uitkering}            € ${uitkering_geformateerd} per maand
+    Element Should Contain         ${selector_bruto_inkomsten}         € 0,00 per maand
+    Element Should Contain         ${selector_totaal_bruto_inkomen}    € ${uitkering_geformateerd} per maand
+
+
+

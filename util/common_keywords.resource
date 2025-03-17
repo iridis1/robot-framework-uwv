@@ -8,7 +8,7 @@ Resource    ../config.resource
 *** Keywords ***
 
 Open Site
-    Log    ${BASE_URL}
+    Log    Opening ${BASE_URL}...
     Set Screenshot Directory    screenshots
     Open Browser    ${BASE_URL}    ${BROWSER}
 

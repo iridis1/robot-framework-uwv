@@ -7,7 +7,6 @@ Test Setup      Set Configuration
 Test Teardown   Close Browser
 
 Library         SeleniumLibrary
-Library         String
 Library         ../lib/Format.py
 Library         ../expectations/Wajong.py
 

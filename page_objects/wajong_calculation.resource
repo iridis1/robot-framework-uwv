@@ -48,4 +48,3 @@ Select Arbeidsvermogen
 Click Answer    
     [Arguments]    ${test_id_postfix}
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_${test_id_postfix}"]/div/div/label
-

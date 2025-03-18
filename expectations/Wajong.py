@@ -1,7 +1,7 @@
 class Wajong:
 
     """"
-    Calculated monthly benefit. Scenario for income not supported.
+    Calculate monthly benefit. Scenario with income not supported.
     """
     def calculate_benefit(self, age: int, can_work: bool, income = 0):
         if income > 0:

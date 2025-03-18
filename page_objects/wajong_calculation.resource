@@ -10,14 +10,13 @@ ${selector_totaal_bruto_inkomen}       xpath://dt[text()="Totale bruto-inkomen"]
 
 *** Keywords ***
 
-Click Start Button
-    Click Button     Start
+## Most buttons exist twice, therefor Click Button cannot be used
 
-Click Read Button
-    Click Link       Lees voor
+Click Start Button
+    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step0next"]    
 
 Click Next Step Button
-    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]    # Click Button does not work, there are two buttons with value Volgende
+    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]
     
 Click Restart Button
     Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step4startover"]

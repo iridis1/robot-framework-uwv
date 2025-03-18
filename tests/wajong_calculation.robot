@@ -47,9 +47,8 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Open Site
     Accept Cookies       
     Search                      ${page_title}
-    Wait Until Page Loaded    
     Click Link                  ${page_title} ${page_title_postfix}
-    Wait Until Page Contains    Hoogte Wajong
+    Wait Until Page Contains    Rekenhulp: hoe hoog is mijn Wajong-uitkering?
     Click Start Button
     Page Should Contain         Uw gegevens
 

@@ -13,7 +13,6 @@ ${selector_totaal_bruto_inkomen}       xpath://dt[text()="Totale bruto-inkomen"]
 ## Most buttons exist twice, therefor Click Button cannot be used
 
 Click Start Button
-    Sleep    3
     Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step0next"]
 
 Click Next Step Button

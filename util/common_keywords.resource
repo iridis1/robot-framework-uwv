@@ -20,3 +20,6 @@ Set Configuration
     Set Screenshot Directory      ${SCREEN_SHOTS}
     Set Selenium Implicit Wait    ${IMPLICIT_WAIT}
 
+Wait Until Page Loaded
+    Wait For Condition	return document.readyState == "complete"
+

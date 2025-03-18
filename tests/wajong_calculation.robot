@@ -47,8 +47,7 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Open Site
     Accept Cookies       
     Search                      ${page_title}
-    Wait Until Page Contains    Toont 1-10
-    Sleep                       2
+    Wait Until Page Loaded    
     Click Link                  ${page_title} ${page_title_postfix}
     Wait Until Page Contains    Hoogte Wajong
     Click Start Button

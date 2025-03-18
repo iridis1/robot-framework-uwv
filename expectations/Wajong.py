@@ -1,10 +1,10 @@
 class Wajong:
 
     def calculate_benefit(self, age: int, can_work: bool, income = 0):
-        if (income > 0):
-            raise Exception("Calculation with income not supported.")
-        if (age < 18):
-            raise Exception("Age should be at least 18 years.")
+        if income > 0:
+            raise NotImplementedError("Calculation with income not supported.")
+        if age < 18:
+            raise ValueError("Age should be at least 18 years.")
         match age:
             case 18:
                 if can_work:

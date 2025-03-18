@@ -48,17 +48,15 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Accept Cookies       
     Search                      ${page_title}
     Wait Until Page Contains    Toont 1-10
-    Page Should Contain Link    ${page_title} ${page_title_postfix}
     Click Link                  ${page_title} ${page_title_postfix}
     Wait Until Page Contains    Hoogte Wajong
-    Sleep                       2
-    Title Should Be             ${page_title} ${page_title_postfix}
     Click Start Button
     Page Should Contain         Uw gegevens
 
 # When
 
 Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermogen wordt geselecteerd
+    Title Should Be            ${page_title} ${page_title_postfix}
     Set Test Variable           ${leeftijd}           ${leeftijd}      
     Set Test Variable           ${arbeidsvermogen}    ${arbeidsvermogen}   
     Select Leeftijd             ${leeftijd}
@@ -69,7 +67,7 @@ Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermo
 # Then
 
 Bedragen zijn correct
-    Title Should Be   ${page_title} ${page_title_postfix}
+    Title Should Be                ${page_title} ${page_title_postfix}
     Page Should Contain            De uitkomst
     ${uitkering} =                 Calculate Benefit    ${leeftijd}    ${arbeidsvermogen == "wel"}
     ${uitkering_geformateerd} =    Format Currency      ${uitkering}

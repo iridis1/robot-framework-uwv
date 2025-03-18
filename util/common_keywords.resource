@@ -17,4 +17,3 @@ Accept Cookies
 
 Set Configuration
     Set Screenshot Directory    results/screenshots
-    Set Selenium Implicit Wait    18    # Execution is very slow on GitHub

@@ -17,6 +17,6 @@ Accept Cookies
     Click Element    xpath://span[contains(text(), "Alles accepteren")]    
 
 Set Configuration
-    Set Screenshot Directory      ${BROWSER}
+    Set Screenshot Directory      ${SCREEN_SHOTS}
     Set Selenium Implicit Wait    ${IMPLICIT_WAIT}
 

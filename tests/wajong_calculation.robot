@@ -67,13 +67,13 @@ Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermo
 # Then
 
 Bedragen zijn correct
-    Title Should Be                ${page_title} ${page_title_postfix}
-    Page Should Contain            De uitkomst
-    ${uitkering} =                 Calculate Benefit    ${leeftijd}    ${arbeidsvermogen == "wel"}
-    ${uitkering_geformateerd} =    Format Currency      ${uitkering}
-    Element Should Contain         ${selector_uw_uitkering}            € ${uitkering_geformateerd} per maand
-    Element Should Contain         ${selector_bruto_inkomsten}         € 0,00 per maand
-    Element Should Contain         ${selector_totaal_bruto_inkomen}    € ${uitkering_geformateerd} per maand
+    Title Should Be             ${page_title} ${page_title_postfix}
+    Page Should Contain         De uitkomst
+    ${uitkering} =              Calculate Benefit    ${leeftijd}    ${arbeidsvermogen == "wel"}
+    ${uitkering_formatted} =    Format Currency      ${uitkering}
+    Element Should Contain      ${selector_uw_uitkering}            € ${uitkering_formatted} per maand
+    Element Should Contain      ${selector_bruto_inkomsten}         € 0,00 per maand
+    Element Should Contain      ${selector_totaal_bruto_inkomen}    € ${uitkering_formatted} per maand
 
 
 

@@ -8,12 +8,14 @@ Resource    ../config.resource
 *** Keywords ***
 
 Open Site
-    Log    Opening ${BASE_URL}...
-    Open Browser    ${BASE_URL}    ${BROWSER}
+    Log                Opening ${BASE_URL} using ${BROWSER}...
+    Open Browser       ${BASE_URL}    ${BROWSER}
+    Maximize Browser Window
 
 Accept Cookies
     Wait Until Element Is Visible    xpath://h2[contains(text(), "UWV gebruikt cookies")]
     Click Element    xpath://span[contains(text(), "Alles accepteren")]    
 
 Set Configuration
-    Set Screenshot Directory    results/screenshots
+    Set Screenshot Directory    ${BROWSER}
+

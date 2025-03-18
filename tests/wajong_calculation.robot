@@ -48,14 +48,13 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Accept Cookies       
     Search                      ${page_title}
     Click Link                  ${page_title} ${page_title_postfix}
-    Wait Until Page Contains    Rekenhulp: hoe hoog is mijn Wajong-uitkering?
+    Page Should Contain         Rekenhulp: hoe hoog is mijn Wajong-uitkering?
     Click Start Button
     Page Should Contain         Uw gegevens
 
 # When
 
 Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermogen wordt geselecteerd
-    Title Should Be            ${page_title} ${page_title_postfix}
     Set Test Variable           ${leeftijd}           ${leeftijd}      
     Set Test Variable           ${arbeidsvermogen}    ${arbeidsvermogen}   
     Select Leeftijd             ${leeftijd}

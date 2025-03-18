@@ -1,6 +1,7 @@
 *** Settings ***
 
-Library     SeleniumLibrary
+Library    SeleniumLibrary
+Library    ../util/common_keywords.resource
  
 *** Variables ***
 
@@ -13,6 +14,8 @@ Search
     [Arguments]    ${search_text}
     Input Text     ${search_input}    ${search_text}
     Press Keys     None    ENTER
+    Wait Until Page Loaded
+    Sleep          1    # Somehow links cannot always be interacted with
     
  Login    
     [Arguments]    ${user}    ${password}

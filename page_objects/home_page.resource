@@ -13,7 +13,7 @@ Search
     [Arguments]    ${search_text}
     Input Text     ${search_input}    ${search_text}
     Press Keys     None    ENTER
-    Sleep          2    # Somehow links cannot always be interacted with
+    Sleep          2    # Somehow links can only be interacted with after a second or two
     
  Login    
     [Arguments]    ${user}    ${password}

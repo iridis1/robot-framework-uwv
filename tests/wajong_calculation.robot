@@ -55,8 +55,8 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
 # When
 
 Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermogen wordt geselecteerd
-    Set Test Variable           ${leeftijd}           ${leeftijd}      
-    Set Test Variable           ${arbeidsvermogen}    ${arbeidsvermogen}   
+    Set Test Variable           ${leeftijd}           ${leeftijd}
+    Set Test Variable           ${arbeidsvermogen}    ${arbeidsvermogen}
     Select Leeftijd             ${leeftijd}
     Select Inkomen              geen
     Select Arbeidsvermogen      ${arbeidsvermogen}

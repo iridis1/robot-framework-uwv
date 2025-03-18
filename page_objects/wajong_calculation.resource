@@ -11,10 +11,16 @@ ${selector_totaal_bruto_inkomen}       xpath://dt[text()="Totale bruto-inkomen"]
 *** Keywords ***
 
 Click Start Button
-    Click Button    Start
+    Click Button     Start
 
 Click Read Button
-    Click Link    Lees voor
+    Click Link       Lees voor
+
+Click Next Step Button
+    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]    # Click Button does not work, there are two buttons with value Volgende
+    
+Click Restart Button
+    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step4startover"]
 
 Select Leeftijd
     [Arguments]    ${leeftijd}
@@ -44,5 +50,3 @@ Click Answer
     [Arguments]    ${test_id_postfix}
     Click Element    xpath://bgl-radio[@test-id="inf_rekenhulp1wajong-harmonisatie_step1_${test_id_postfix}"]/div/div/label
 
-Click Next Step Button
-    Click Element    css:bgl-button[button-id="inf_rekenhulp1wajong-harmonisatie_step1next"]    

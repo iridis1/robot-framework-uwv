@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  end2end-test:
     runs-on: ubuntu-latest
 
     steps:

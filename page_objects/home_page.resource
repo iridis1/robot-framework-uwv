@@ -14,7 +14,7 @@ Search
     Input Text     ${search_input}    ${search_text}
     Press Keys     None    ENTER
     Wait Until Element Contains    tag:h1    resultaten voor ${search_text}   
-    #  Sleep          2    # Somehow links can only be interacted with after a second or two
+    Sleep          2    # Somehow links can only be interacted with after a second or two
     
  Login    
     [Arguments]    ${user}    ${password}

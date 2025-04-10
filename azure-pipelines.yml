@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: end2end_test
+  displayName: 'Run end-to-end tests'
+  
+  steps:
+    - task: UsePythonVersion@0
+      displayName: 'Set up Python'
+      inputs:
+        versionSpec: '3.12'
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install Robot Framework and dependencies'
+
+    - script: |
+        robot --xunit xunit.xml --outputdir results .
+      displayName: 'Run Robot Framework tests'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish test results'
+      inputs:
+        pathToPublish: 'results'
+        artifactName: 'Test results'
+        publishLocation: 'Container'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish xunit.xml'
+      inputs:
+        testResultsFormat: JUnit
+        testResultsFiles: '**/xunit.xml'

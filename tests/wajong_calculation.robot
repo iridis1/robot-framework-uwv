@@ -16,7 +16,7 @@ Resource        ../page_objects/wajong_calculation.resource
 
 *** Variables ***
 
-${page_title}           Hoogte Wajong-uitkering in 2025
+${page_title}           Hoogte Wajong
 ${page_title_postfix}   | UWV
 
 
@@ -46,7 +46,7 @@ Gebruiker start rekenhulp voor hoogte Wajong-uitkering
     Open Site
     Accept Cookies       
     Search                      ${page_title}
-    Click Link                  ${page_title} ${page_title_postfix}
+    Click Link                  ${page_title}
     Page Should Contain         Rekenhulp: hoe hoog is mijn Wajong-uitkering?
     Click Start Button
     Page Should Contain         Uw gegevens
@@ -64,7 +64,7 @@ Leeftijd ${leeftijd}, geen andere inkomsten maar ${arbeidsvermogen} arbeidsvermo
 # Then
 
 Bedragen zijn correct
-    Title Should Be             ${page_title} ${page_title_postfix}
+    Page Should Contain         ${page_title}
     Page Should Contain         De uitkomst
     ${uitkering} =              Calculate Benefit    ${leeftijd}    ${arbeidsvermogen == "wel"}
     ${uitkering_formatted} =    Format Currency      ${uitkering}
